@@ -1,25 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ChMLab1.Entities;
-using ChMLab1.Interfaces;
+﻿using ChMLab1.Interfaces;
 
 namespace ChMLab1
 {
-    class NewtonMethod : IDotInputMethod
+    class NewtonMethod : NumericMethod
     {
-        public int IterationCount()
-        {
-            return 10;
-        }
+        public NewtonMethod(double precision) : base(precision) { }
 
-        public double Root(Dot dot, Polynom p)
+        public override double Iterate(double x, Polynom p)
         {
-            double x = dot.X;
-            var dp = p.Derivative();
-            for (int i = 0; i < IterationCount(); i++)
-                x -= p.Value(x) / dp.Value(x);
-            return x;
+            return x - p.Value(x) / p.Derivative().Value(x);
         }
     }
 }

@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ChMLab1.Entities;
-using ChMLab1.Interfaces;
+﻿using ChMLab1.Interfaces;
+using System;
 
 namespace ChMLab1
 {
-    class SecantMethod : IDotInputMethod
+    class SecantMethod : NumericMethod
     {
-        public int IterationCount()
+        public SecantMethod(double precision) : base(precision)
         {
-            return 5;
         }
 
-        public double Root(Dot dot, Polynom p)
+        public override double Iterate(double x, Polynom p)
         {
-            double x = dot.X;
+            throw new NotImplementedException();
+        }
+
+        new public double Seek(double x, Polynom p)
+        {
             double x2 = p.Value(x) / p.Derivative().Value(x);
-            for(int i = 0; i < IterationCount(); i++)
+            while (!Stop(x, x2, p))
             {
                 var buffer = x;
                 x -= (x - x2) * p.Value(x) / (p.Value(x) - p.Value(x2));

@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ChMLab1.Interfaces;
 
 namespace ChMLab1
 {
-    class RelaxationMethod : INumericMethod
+    class RelaxationMethod : NumericMethod
     {
-        public int IterationCount()
+        public RelaxationMethod(double precision) : base(precision)
         {
-            throw new NotImplementedException();
         }
 
-        public double Root(Range range)
+        public override double Iterate(double x, Polynom p)
         {
             throw new NotImplementedException();
         }
