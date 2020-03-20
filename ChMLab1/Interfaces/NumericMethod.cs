@@ -12,7 +12,10 @@ namespace ChMLab1.Interfaces
         public double Seek(double x, Polynom p)
         {
             while (!Stop(x, p))
+            {
+                Console.WriteLine(String.Format("|{0:F6}|{1}", x, p.Value(x)));
                 x = Iterate(x, p);
+            }
             return x;
         }
 

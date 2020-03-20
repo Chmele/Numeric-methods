@@ -7,13 +7,14 @@ namespace ChMLab1
 {
     class RelaxationMethod : NumericMethod
     {
+        private double tau = -0.0434;
         public RelaxationMethod(double precision) : base(precision)
         {
         }
 
         public override double Iterate(double x, Polynom p)
         {
-            throw new NotImplementedException();
+            return x + tau * p.Value(x);
         }
     }
 }

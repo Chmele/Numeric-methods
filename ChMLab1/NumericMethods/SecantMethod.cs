@@ -19,6 +19,7 @@ namespace ChMLab1
             double x2 = p.Value(x) / p.Derivative().Value(x);
             while (!Stop(x, x2, p))
             {
+                Console.WriteLine(String.Format("|{0:F6}|{1:F6}|{2}", x, x2, p.Value(x)));
                 var buffer = x;
                 x -= (x - x2) * p.Value(x) / (p.Value(x) - p.Value(x2));
                 x2 = buffer;
