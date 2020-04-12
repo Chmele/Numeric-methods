@@ -8,9 +8,8 @@ namespace ChMLab1
     class RelaxationMethod : NumericMethod
     {
         private double tau = -0.0434;
-        public RelaxationMethod(double precision) : base(precision)
-        {
-        }
+        public RelaxationMethod(double precision) : base(precision) { }
+        public RelaxationMethod(double precision, ILogger l) : base(precision, l) { }
 
         public override double Iterate(double x, Polynom p)
         {
