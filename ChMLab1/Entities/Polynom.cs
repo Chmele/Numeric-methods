@@ -24,8 +24,8 @@ namespace ChMLab1
         {
             var c = new List<double>(coefficients);
             for (int i = 0; i < coefficients.Count; i++)
-                c[i] *= i;//Умножаем степень на коэффициент
-            c.RemoveAt(0);//Производная константы - 0. И он не нужен.
+                c[i] *= i;
+            c.RemoveAt(0);
             return new Polynom(c);
         }
     }

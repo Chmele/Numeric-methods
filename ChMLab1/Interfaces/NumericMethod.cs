@@ -4,22 +4,32 @@ namespace ChMLab1.Interfaces
 {
     abstract class NumericMethod
     {
+        protected double precision;
+        public ILogger logger;
+
         public NumericMethod(double precision)
         {
             this.precision = precision;
+            logger = new NullLogger();
+        }
+
+        public NumericMethod(double precision, ILogger logger)
+        {
+            this.precision = precision;
+            this.logger = logger;
         }
 
         public double Seek(double x, Polynom p)
         {
             while (!Stop(x, p))
             {
-                Console.WriteLine(String.Format("|{0:F6}|{1}", x, p.Value(x)));
+                logger.Log(x,p.Value(x));
                 x = Iterate(x, p);
             }
+            logger.Log(x, p.Value(x));
             return x;
         }
 
-        protected double precision;
         protected bool Stop(double x, Polynom p)
         {
             double x2 = Iterate(x, p);
