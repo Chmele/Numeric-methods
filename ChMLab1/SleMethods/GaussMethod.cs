@@ -11,12 +11,12 @@ namespace ChMLab1
 
         public GaussMethod(double precision, ILogger logger) : base(precision, logger) { }
 
-        public override List<double> Iterate(Matrix m, List<double> v, List<double> answers){return null;}
+        public override List<double> Iterate(SLE m, List<double> answers){return null;}
 
-        public List<double> Seek(Matrix m, List<double> v)
+        new public List<double> Seek(SLE m, List<double> v)
         {
             for (int i = 0; i < v.Count; i++)
-                m.ColNormalize(i, i, v);
+                m.ColNormalize(i, i);
             return v;
         }
         

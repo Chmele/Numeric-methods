@@ -37,8 +37,9 @@ namespace ChMLab1
             var gauss = new GaussMethod(epsilon, l);
 
             //l.Log(gauss.Seek(m, v));
-            l.Log(jacobi.SeekIterations(m2, v2, answers,30));
-
+            var s2 = new SLE(m2, v2);
+            //l.Log(jacobi.Seek(s2, answers));
+            Console.Write(m2.Determinant);
         }
     }
 }

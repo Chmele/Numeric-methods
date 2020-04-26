@@ -9,15 +9,13 @@ namespace ChMLab1
     {
         public JacobiMethod(double precision) : base(precision) { }
 
-        public JacobiMethod(double precision, ILogger logger) : base(precision, logger)
-        {
-        }
+        public JacobiMethod(double precision, ILogger logger) : base(precision, logger) { }
 
-        public override List<double> Iterate(Matrix m, List<double> v, List<double> answers)
+        public override List<double> Iterate(SLE m, List<double> answers)
         {
             var newAnswers = new List<double>(answers);
-            for(int i = 0; i < v.Count; i++)
-                newAnswers[i] = Express(i, new List<double>(new List<double>(m.GetRow(i))),answers,v[i]);
+            for(int i = 0; i < m.Right.Count; i++)
+                newAnswers[i] = Express(i, new List<double>(new List<double>(m.Left.GetRow(i))),answers,m.Right[i]);
             answers = newAnswers;
             return answers;
         }
