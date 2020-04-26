@@ -8,7 +8,7 @@ namespace ChMLab1
     {
         double[,] m = { };
         
-        public Matrix(double[,] m )
+        public Matrix(double[,] m)
         {
             this.m = m;
         }
@@ -28,13 +28,6 @@ namespace ChMLab1
             for (int i = 0; i < m.GetLength(0); i++)
                 m[n, i] = l[i];
         }
-        
-        public void SwapRows(int n, int m)
-        {
-            var buf = GetRow(n);
-            SetRow(n, GetRow(m));
-            SetRow(m, buf);
-        }
 
         public void DiffRows(int n, int m, double c)
         {
@@ -52,16 +45,32 @@ namespace ChMLab1
                 b[i] /= d;
             SetRow(n, b);
         }
-        public void ColNormalize(int n, int m, List<double> l)
+        public void ColNormalize(int n, int m)
         {
-            l[n] /= this.m[n, m];
             DivRow(n, this.m[n, m]);
             for (int i = 0; i < this.m.GetLength(0); i++)
                 if (i != n)
-                {
-                    l[i] -= l[n] / (this.m[n, m] / this.m[i, m]);
                     DiffRows(n, i, this.m[n, m] / this.m[i, m]);
+        }
+        public int GetSize(int n) 
+        {
+            return m.GetLength(n);
+        }
+        
+        public double Determinant
+        {
+            get 
+            {
+                var c = new Matrix(m);
+                var dim = this.m.GetLength(0);
+                double res = 1;
+                for (int i = 0; i < dim; i++)
+                {
+                    res *= c[i,i];
+                    c.ColNormalize(i,i);
                 }
+                return res;
+            }
         }
     }
 }
