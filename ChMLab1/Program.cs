@@ -7,39 +7,37 @@ namespace ChMLab1
     {
         static void Main(string[] args)
         {
-            double epsilon = 0.001;
-            var k = new double[,] {
-                { 5, 2, 1, 0},
-                { 1, 3, 2, 8},
-                { 4, -6, 1, 0},
-                { 5, 0, 3, 2} 
+            var a = new double[,] {
+                {1,2,3},
+                {2,3,4},
+                {3,4,5}
             };
+            var m = new Matrix(a);
+            var start = new List<double>{1,1,1};
+            Console.WriteLine(m.Max_Eigenvalue(start));
+            // var f1 = new Func<List<double>,double>((d) => Math.Sin(d[0]) + 2*d[1] - 1.6);
+            // var f2 = new Func<List<double>,double>((d) => Math.Cos(d[1]-1) - 1);
 
-            var v = new List<double> { 14, 65, -3, 32 };
+            // var j11 = new Func<List<double>,double>((d) => Math.Cos(d[0]) + 2*d[1]);
+            // var j12 = new Func<List<double>,double>((d) => Math.Sin(d[0]) + 2);
+            // var j21 = new Func<List<double>,double>((d) => 0);
+            // var j22 = new Func<List<double>,double>((d) => -Math.Sin(d[1]-1));
 
-            var k2 = new double[,] {
-                { 4, 0, 1, 1},
-                { 0, 3, 0, 1},
-                { 1, 0, 2, 0},
-                { 1, 1, 0, 5} 
-            };
+            // var functions = new List<Func<List<double>,double>>{f1,f2};
+            // var jacobi = new Func<List<double>,double>[,]{
+            //     {j11,j12},
+            //     {j21,j22}
+            // };
 
-            var v2 = new List<double> { 11, 10, 7, 23 };
-
-            var m = new Matrix(k);
-            var m2 = new Matrix(k2);
-
-            var answers = new List<double> { 0, 0, 0, 0 };
-
-            var l = new ConsoleLogger();
-
-            var jacobi = new JacobiMethod(epsilon, l);
-            var gauss = new GaussMethod(epsilon, l);
-
-            //l.Log(gauss.Seek(m, v));
-            var s2 = new SLE(m2, v2);
-            //l.Log(jacobi.Seek(s2, answers));
-            Console.Write(m2.Determinant);
+            // var sne = new SNE(functions, jacobi);
+            // var start = new List<double> { 0.5, 0.5};
+            // var ans = NewtonSNE.Seek(sne, start);
+            // foreach(double k in ans)
+            // {
+            //    Console.WriteLine(k);
+            // }
+            // Console.WriteLine(f1(ans));
+            // Console.WriteLine(f2(ans));
         }
     }
 }
