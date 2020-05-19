@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ChMLab1
 {
@@ -14,6 +13,22 @@ namespace ChMLab1
         }
 
         public double this[int n, int m] => this.m[n,m];
+
+        public static List<double> operator *(Matrix a, List<double> b)
+        {
+            var ret = new List<double>();
+            for(int i = 0; i < b.Count; i++)
+            {
+                var r = a.GetRow(i);
+                double member = 0;
+                for(int j = 0; j < b.Count; j++)
+                {
+                    member += b[j] * r[j];
+                }
+                ret.Add(member);
+            }
+            return ret;
+        }
 
         public List<double> GetRow(int n)
         {
@@ -61,7 +76,8 @@ namespace ChMLab1
         {
             get 
             {
-                var c = new Matrix(m);
+                double[,] m2 = m.Clone() as double[,];
+                var c = new Matrix(m2);
                 var dim = this.m.GetLength(0);
                 double res = 1;
                 for (int i = 0; i < dim; i++)
@@ -71,6 +87,23 @@ namespace ChMLab1
                 }
                 return res;
             }
+        }
+
+        public double Max_Eigenvalue(List<double> start, double eps = 0.001)
+        {
+            var old_iter = start;
+            var iter = this * start;
+            double old_ret = 0;
+            double ret = iter[0]/old_iter[0];
+            do
+            {
+                old_ret = ret;
+                old_iter = iter;
+                iter = this * iter;
+                ret = iter[0]/old_iter[0];
+            }
+            while(Math.Abs(ret - old_ret) > eps);
+            return ret;
         }
     }
 }

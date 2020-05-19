@@ -13,11 +13,11 @@ namespace ChMLab1
 
         public override List<double> Iterate(SLE m, List<double> answers){return null;}
 
-        new public List<double> Seek(SLE m, List<double> v)
+        public List<double> Seek(SLE m)
         {
-            for (int i = 0; i < v.Count; i++)
+            for (int i = 0; i < m.Right.Count; i++)
                 m.ColNormalize(i, i);
-            return v;
+            return m.Right;
         }
         
     }
